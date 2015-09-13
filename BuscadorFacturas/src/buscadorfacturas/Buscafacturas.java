@@ -273,7 +273,7 @@ public class Buscafacturas extends javax.swing.JFrame {
     double porcFraNoE;   
     String pathBusqueda = "C:\\FUNDACIO\\CARPETA FACTURAS";
     private String destino="C:\\";
-    JLabel logos= new JLabel(new ImageIcon("images/Logo_FCRB.gif"));
+    JLabel logos= new JLabel(new ImageIcon("images/Logo_FCRB.gif"));//intento subir commit
     
     
 
