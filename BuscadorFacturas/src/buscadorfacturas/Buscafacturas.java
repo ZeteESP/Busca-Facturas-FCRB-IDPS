@@ -273,7 +273,7 @@ public class Buscafacturas extends javax.swing.JFrame {
     double porcFraNoE;   
     String pathBusqueda = "C:\\FUNDACIO\\CARPETA FACTURAS";
     private String destino="C:\\";
-    
+    //prueba commit
     
     
 
