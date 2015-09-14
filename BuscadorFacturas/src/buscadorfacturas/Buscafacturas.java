@@ -172,16 +172,40 @@ public class Buscafacturas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void escollirCarpetaDesti(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escollirCarpetaDesti
-        String path = "C:\\Users\\Adrián\\Documents";
-        JFileChooser chooser = new JFileChooser(path);
-        int returnVal = chooser.showOpenDialog(this);
+//        String path = "C:\\Users\\Adrián\\Documents";
+//        JFileChooser chooser = new JFileChooser(path);
+//        int returnVal = chooser.showOpenDialog(this);
+//        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//        chooser.setAcceptAllFileFilterUsed(false);
+//        if (returnVal == JFileChooser.APPROVE_OPTION) {
+//            destino = chooser.getCurrentDirectory().getName();
+//            System.out.println("Has seleccionat el directori: "
+//                    + chooser.getCurrentDirectory().getAbsolutePath());
+//        }
+         
+         JFileChooser chooser;
+//         String choosertitle;
+
+        chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new java.io.File("."));
+//        chooser.setDialogTitle(choosertitle);
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+    //
+        // disable the "All files" option.
+        //
         chooser.setAcceptAllFileFilterUsed(false);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            destino = chooser.getCurrentDirectory().getName();
-            System.out.println("Has seleccionat el directori: "
-                    + chooser.getCurrentDirectory().getAbsolutePath());
+        //    
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            destino =  chooser.getSelectedFile().getAbsolutePath();
+            System.out.println("getCurrentDirectory(): "
+                    + chooser.getCurrentDirectory());
+            System.out.println("getSelectedFile() : "
+                    + chooser.getSelectedFile());
+        } else {
+            System.out.println("No Selection ");
         }
+        
+        
     }//GEN-LAST:event_escollirCarpetaDesti
 
     private void guardarFacturas(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarFacturas
