@@ -32,12 +32,12 @@ public class FileCopy {
         Runtime r = Runtime.getRuntime();
         String[] comando = {"cmd", "/C", "copy "+pathFactura+" "+destino};
         Process p = r.exec(comando);
-        try (BufferedReader bR = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
-            String texto;
-            while ((texto = bR.readLine()) != null) {
-                System.out.println(texto);
-            }
-        }
+//        try (BufferedReader bR = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
+//            String texto;
+//            while ((texto = bR.readLine()) != null) {
+//                System.out.println(texto);
+//            }
+//        }
     }
 
     

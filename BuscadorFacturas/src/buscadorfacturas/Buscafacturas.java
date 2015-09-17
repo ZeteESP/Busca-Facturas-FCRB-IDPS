@@ -12,6 +12,8 @@ import javax.swing.JFileChooser;
 import javax.swing.*;
 import java.io.*;
 import java.awt.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  *
  * @author Adrián
@@ -220,9 +222,11 @@ public class Buscafacturas extends javax.swing.JFrame {
                 for (String fac : facturasBuscar) {  //hace un for para cada fac del estring facturasBuscar
 
                     if (fcrb.isSelected()) {  //Inicia busqueda para los gastos marcados para FUND
-                        for (int i = 0; i <= fs.length && !encontrado; i++) {  //busca en fs si no se ha encontrado la factura
-
-                            if (fs[i].matches(pathBusqueda + "\\FUNDACIO 20*")) {  //Si el f[i] coincide con un path que lleva a FUND
+                        for (int i = 0; i < fs.length && !encontrado; i++) {  //busca en fs si no se ha encontrado la factura
+                            Pattern p = Pattern.compile("FUNDACIO 20*");
+                            Matcher m= p.matcher(fs[i]);
+                            if (m.matches()){
+//                            if (fs[i].matches("FUNDACIO 20##")) {  //Si el f[i] coincide con un path que lleva a FUND
                                 subf = new File(fs[i]);   //Crea el objeto subf que contiene el fs en la posición i
                                 if (subf.isDirectory()) {  //Comprueba si subf es un directorio
                                     encontrado = buscarFacturaDirectorio(fac, subf);  //envia al metodo la fac y el directorio
@@ -295,7 +299,7 @@ public class Buscafacturas extends javax.swing.JFrame {
     private String facturasNoE[];
     int cuentaFra, cuentaFraNoE;
     double porcFraNoE;   
-    String pathBusqueda = "C:\\FUNDACIO\\CARPETA FACTURAS";
+    String pathBusqueda = "C:/FUNDACIO/CARPETA FACTURAS";
     private String destino;
     //prueba commit 2 
     
@@ -306,7 +310,8 @@ public class Buscafacturas extends javax.swing.JFrame {
         String[] subdir = subf.list();   //mete en el string subdir el contenido de subf que previamente se ha cromprobado que es un Directorio
         boolean encontrado = false;    //Devolvera un boolean si lo encuentra
         for (int i = 0; i < subdir.length && !encontrado; i++) {//for para buscar en subdir
-            File f = new File(subdir[i]);  // crea el objeto f de la clase flie con subdir[i]
+            File f = new File(subdir[i]); 
+            System.out.println(f.getName());// crea el objeto f de la clase flie con subdir[i]
             if (f.isFile()&& f.getName().matches(fac)) { try {
                 //Si es un archivo debera comprobar si es la factura que buscamos
                 FileCopy fileCopy = new FileCopy(f.getAbsolutePath(),destino);
