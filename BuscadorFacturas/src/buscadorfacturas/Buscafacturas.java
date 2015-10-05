@@ -215,7 +215,7 @@ public class Buscafacturas extends javax.swing.JFrame {
         if (!jTextArea1.getText().isEmpty()) {   // Una comprobacion que no este vacio el area donde se introducen facturas
             facturasBuscar = jTextArea1.getText().split("\n");   //Mete en el array lo que hay en JTextArea con un split por linea
             cuentaFra = facturasBuscar.length;   //Para el panel de info, mete la cantidad de facturas a buscar
-
+            System.out.println("guardarfactura"+jTextArea1.getText()+ " num fact "+ cuentaFra);
             if (cuentaFra > 0) {  //Comprobacion que haya al menos una factura a buscar
                 File f = new File(pathBusqueda), subf;  //Crea el objeto f con el path comun y el objecto subf para
                 String[] fs = f.list();  //lista el contenido de f y lo mete en el array de Strings fs
@@ -223,12 +223,15 @@ public class Buscafacturas extends javax.swing.JFrame {
 
                     if (fcrb.isSelected()) {  //Inicia busqueda para los gastos marcados para FUND
                         for (int i = 0; i < fs.length && !encontrado; i++) {  //busca en fs si no se ha encontrado la factura
-                            Pattern p = Pattern.compile("FUNDACIO 20*");
+                            Pattern p = Pattern.compile("^FUNDACIO 20.*");
                             Matcher m= p.matcher(fs[i]);
+                            System.out.println("factura "+fs[i]);
                             if (m.matches()){
+                                System.out.println("factura1 "+fs[i]);
 //                            if (fs[i].matches("FUNDACIO 20##")) {  //Si el f[i] coincide con un path que lleva a FUND
-                                subf = new File(fs[i]);   //Crea el objeto subf que contiene el fs en la posición i
+                                subf = new File(pathBusqueda+fs[i]);   //Crea el objeto subf que contiene el fs en la posición i
                                 if (subf.isDirectory()) {  //Comprueba si subf es un directorio
+                                    System.out.println("hemos entrado en la carpeta "+subf.getName());
                                     encontrado = buscarFacturaDirectorio(fac, subf);  //envia al metodo la fac y el directorio
                                 }
 
@@ -299,7 +302,8 @@ public class Buscafacturas extends javax.swing.JFrame {
     private String facturasNoE[];
     int cuentaFra, cuentaFraNoE;
     double porcFraNoE;   
-    String pathBusqueda = "C:/FUNDACIO/CARPETA FACTURAS";
+    String pathBusqueda = "C:/FUNDACIO/CARPETA FACTURAS/";
+    String pathBusquedaCMD = "C:/FUNDACIO/\"CARPETA FACTURAS\"/";
     private String destino;
     //prueba commit 2 
     
@@ -311,10 +315,11 @@ public class Buscafacturas extends javax.swing.JFrame {
         boolean encontrado = false;    //Devolvera un boolean si lo encuentra
         for (int i = 0; i < subdir.length && !encontrado; i++) {//for para buscar en subdir
             File f = new File(subdir[i]); 
-            System.out.println(f.getName());// crea el objeto f de la clase flie con subdir[i]
-            if (f.isFile()&& f.getName().matches(fac)) { try {
+            System.out.println(f.getName()+ " " +fac + " " + f.isDirectory());// crea el objeto f de la clase flie con subdir[i]
+            if (!f.isDirectory()&& f.getName().matches(fac)) { try {
                 //Si es un archivo debera comprobar si es la factura que buscamos
-                FileCopy fileCopy = new FileCopy(f.getAbsolutePath(),destino);
+                System.out.println("encontrado"+subf.getAbsolutePath()+"\\"+fac);
+                FileCopy fileCopy = new FileCopy(subf.getAbsolutePath()+"\\"+fac,destino);
                 } catch (Exception ex) {
                     Logger.getLogger(Buscafacturas.class.getName()).log(Level.SEVERE, null, ex);
                 }

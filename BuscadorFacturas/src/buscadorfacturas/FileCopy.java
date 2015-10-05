@@ -31,6 +31,7 @@ public class FileCopy {
 
         Runtime r = Runtime.getRuntime();
         String[] comando = {"cmd", "/C", "copy "+pathFactura+" "+destino};
+        System.out.println(comando[2] );
         Process p = r.exec(comando);
 //        try (BufferedReader bR = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
 //            String texto;
@@ -42,6 +43,6 @@ public class FileCopy {
 
     
     public static void main(String[] args) throws Exception {
-//        FileCopy fileCopy = new FileCopy();
+//        FileCopy fileCopy = new FileCopy("C:\\Desert.jpg","C:\\FUNDACIO\\\"CARPETA FACTURAS\"");
     }
 }
