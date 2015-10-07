@@ -30,8 +30,8 @@ public class FileCopy {
     public FileCopy(String pathFactura, String destino) throws Exception {
 
         Runtime r = Runtime.getRuntime();
-        String[] comando = {"cmd", "/C", "copy "+pathFactura+" "+destino};
-        System.out.println(comando[2] );
+        String[] comando = {"cmd", "/C", "copy "+ponerComitasCarpetasConEspacios(pathFactura)+" "+ponerComitasCarpetasConEspacios(destino)};
+        System.out.println("filecopy" + comando[2] );
         Process p = r.exec(comando);
 //        try (BufferedReader bR = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
 //            String texto;
@@ -39,6 +39,25 @@ public class FileCopy {
 //                System.out.println(texto);
 //            }
 //        }
+    }
+    
+    public String ponerComitasCarpetasConEspacios(String path  ){
+        
+        String [] carpetas=path.split("/");
+        String pathCMD="";
+        
+        for (int i = 0 ; i< carpetas.length;i++){
+            
+            if (carpetas[i].contains(" ")){
+                carpetas [i]="\""+carpetas[i]+"\"";
+            }
+            if (i<carpetas.length-1)
+            pathCMD += carpetas[i]+"/";
+    }
+        
+        
+        
+        return pathCMD;
     }
 
     
