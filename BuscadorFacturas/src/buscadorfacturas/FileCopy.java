@@ -43,7 +43,8 @@ public class FileCopy {
     
     public String ponerComitasCarpetasConEspacios(String path  ){
         
-        String [] carpetas=path.split("/");
+        System.out.println(path);
+        String [] carpetas=path.replace('\\', '/').split("/");
         String pathCMD="";
         
         for (int i = 0 ; i< carpetas.length;i++){
@@ -53,11 +54,12 @@ public class FileCopy {
             }
             if (i<carpetas.length-1)
             pathCMD += carpetas[i]+"/";
+            else pathCMD += carpetas[i];
     }
         
         
         
-        return pathCMD;
+        return pathCMD.replace('/','\\');
     }
 
     
