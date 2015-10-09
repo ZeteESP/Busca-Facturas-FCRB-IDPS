@@ -9,9 +9,6 @@ import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.*;
-import java.io.*;
-import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /**
