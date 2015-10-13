@@ -242,7 +242,7 @@ public class Buscafacturas extends javax.swing.JFrame {
         }
         return encontrado;
     }
-    //   nuevo comit
+    //   nuevo comit  2
     /**
      * @param args the command line arguments
      */
